@@ -276,4 +276,6 @@ WHERE w.Ward_Name = 'ICU'
 GROUP BY p.Firstname, p.Surname, d.Diagnosis_Description;
 ```
 
-### Key Insights
+---
+
+### 📊 Key Insights
