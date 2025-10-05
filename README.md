@@ -114,5 +114,4 @@ The schema enforces **referential integrity** through foreign keys, connecting t
 - Each **GP** belongs to a **GP Practice**.  
 - Each **Admission** can have multiple **Diagnoses**.  
  
-```markdown
-[ERD Preview](https://github.com/Opelobami/Healthy-Life-Hospitals/blob/main/assets/ERD_Diagram.png)
+[ERD Preview] (https://github.com/Opelobami/Healthy-Life-Hospitals/blob/main/assets/ERD_Diagram.png)
