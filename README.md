@@ -115,3 +115,71 @@ The schema enforces **referential integrity** through foreign keys, connecting t
 - Each **Admission** can have multiple **Diagnoses**.  
  
 [ERD Preview] (https://drive.google.com/file/d/1zE87fWG0Xk6OdTz2y1oD4Bd-UF9bUyLI/view?usp=sharing)
+
+---
+
+## 🧰 Tools & Technologies  
+
+- **SQL Server** – Database design, creation, querying, and ERD Diagram 
+- **Power BI (Optional)** – Dashboard reporting and KPI visualization  
+- **Excel / CSV** – Data entry, cleaning, and validation  
+
+---
+
+## ⚙️ Project Workflow  
+
+1. **Database Design**  
+   - Developed an ERD to visualize entity relationships.  
+   - Normalized all tables up to **Third Normal Form (3NF)** to eliminate redundancy and ensure efficiency.  
+
+2. **Database Creation & Population**  
+   - Implemented `CREATE TABLE` scripts with **primary** and **foreign keys**.  
+   - Loaded and validated sample datasets using `INSERT INTO` commands.  
+
+3. **Data Querying & Analysis**  
+   - Performed **joins, subqueries, and aggregations** for relational insights.  
+   - Generated analytical reports on patient admissions, diagnosis frequency, and ward occupancy.  
+
+4. **Insights & Visualization**  
+   - Integrated results with **Power BI** to visualize key healthcare metrics like admission trends and GP workload.  
+
+---
+
+## 💡 Sample SQL Queries  
+
+```sql
+-- 1️⃣ Retrieve all patients with GP, specialty, and ward information
+SELECT p.PatientName, g.GP_Name, s.SpecialtyName, w.WardName, a.AdmissionDate
+FROM Admission a
+JOIN Patient p ON a.PatientID = p.PatientID
+JOIN GP g ON a.GP_ID = g.GP_ID
+JOIN Specialty s ON g.SpecialtyID = s.SpecialtyID
+JOIN Ward w ON a.WardID = w.WardID;
+
+-- 2️⃣ Count admissions by method of admission
+SELECT m.MethodDescription, COUNT(a.AdmissionID) AS TotalAdmissions
+FROM Admission a
+JOIN MethodOfAdmission m ON a.MethodID = m.MethodID
+GROUP BY m.MethodDescription;
+
+-- 3️⃣ Most frequent diagnosis types
+SELECT DiagnosisType, COUNT(*) AS Occurrences
+FROM Diagnosis
+GROUP BY DiagnosisType
+ORDER BY Occurrences DESC;
+
+-- 4️⃣ GP performance by number of admissions handled
+SELECT g.GP_Name, s.SpecialtyName, COUNT(a.AdmissionID) AS AdmissionsHandled
+FROM GP g
+JOIN Admission a ON g.GP_ID = a.GP_ID
+JOIN Specialty s ON g.SpecialtyID = s.SpecialtyID
+GROUP BY g.GP_Name, s.SpecialtyName
+ORDER BY AdmissionsHandled DESC;
+
+-- 5️⃣ Ward utilization report
+SELECT w.WardName, w.Capacity, COUNT(a.AdmissionID) AS CurrentOccupancy,
+       ROUND(COUNT(a.AdmissionID)/w.Capacity * 100, 1) AS OccupancyRate
+FROM Ward w
+LEFT JOIN Admission a ON w.WardID = a.WardID
+GROUP BY w.WardName, w.Capacity;
+
