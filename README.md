@@ -274,3 +274,6 @@ JOIN Diagnosis d ON d.Admission_ID = a.AdmissionID
 JOIN Ward w ON w.Ward_Code = a.WardCode
 WHERE w.Ward_Name = 'ICU'
 GROUP BY p.Firstname, p.Surname, d.Diagnosis_Description;
+```
+
+### Key Insights
