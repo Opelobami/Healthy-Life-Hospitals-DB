@@ -145,9 +145,10 @@ The schema enforces **referential integrity** through foreign keys, connecting t
 
 ---
 
-## 💡 Sample SQL Queries  
+## 🧩 Sample SQL Queries
 
--- 1. List all patients with their details (ID, Name, Gender, Date of Birth, Postcode)
+```sql
+-- 1️. List all patients with their details (ID, Name, Gender, Date of Birth, Postcode)
 SELECT *
 FROM Patient;
 
