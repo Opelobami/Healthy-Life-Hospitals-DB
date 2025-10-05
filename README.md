@@ -147,39 +147,129 @@ The schema enforces **referential integrity** through foreign keys, connecting t
 
 ## 💡 Sample SQL Queries  
 
-```sql
--- 1️⃣ Retrieve all patients with GP, specialty, and ward information
-SELECT p.PatientName, g.GP_Name, s.SpecialtyName, w.WardName, a.AdmissionDate
+-- 1. List all patients with their details (ID, Name, Gender, Date of Birth, Postcode)
+SELECT *
+FROM Patient;
+
+-- 2. Retrieve the total number of admissions per patient
+SELECT CONCAT(p.Firstname, ' ', p.Surname) AS FullName, COUNT(*) AS TotalAdmission
+FROM Patient p
+JOIN Admission a ON p.PatientID = a.Patient_ID
+GROUP BY p.Firstname, p.Surname
+ORDER BY TotalAdmission DESC;
+
+-- 3. Find the maximum length of stay in FY 2014/15 for Endoscopy Suite (Elective)
+SELECT MAX(DATEDIFF(DAY, Admission_Date, Discharge_Date)) AS MaxLengthOfStay
 FROM Admission a
-JOIN Patient p ON a.PatientID = p.PatientID
-JOIN GP g ON a.GP_ID = g.GP_ID
-JOIN Specialty s ON g.SpecialtyID = s.SpecialtyID
-JOIN Ward w ON a.WardID = w.WardID;
+JOIN Ward w ON w.Ward_Code = a.WardCode
+JOIN Method_of_admission m ON m.Method_of_admission_code = a.Method_of_admission_code
+WHERE Discharge_Date BETWEEN '2014-04-01' AND '2015-03-31'
+  AND w.Ward_Name = 'Endoscopy Suite'
+  AND m.Method_of_admission_type = 'Elective';
 
--- 2️⃣ Count admissions by method of admission
-SELECT m.MethodDescription, COUNT(a.AdmissionID) AS TotalAdmissions
+-- 4. Total number of admissions per ward in FY 2015/16
+SELECT w.Ward_Name, COUNT(*) AS TotalAdmission
 FROM Admission a
-JOIN MethodOfAdmission m ON a.MethodID = m.MethodID
-GROUP BY m.MethodDescription;
+JOIN Ward w ON a.WardCode = w.Ward_Code
+WHERE Admission_Date BETWEEN '2015-04-01' AND '2016-03-31'
+GROUP BY w.Ward_Name
+ORDER BY TotalAdmission DESC;
 
--- 3️⃣ Most frequent diagnosis types
-SELECT DiagnosisType, COUNT(*) AS Occurrences
-FROM Diagnosis
-GROUP BY DiagnosisType
-ORDER BY Occurrences DESC;
+-- 5. Most common primary diagnosis (Emergency, SK2 area, FY 2015/16)
+SELECT TOP 1 d.Diagnosis_code, d.Diagnosis_Description
+FROM Admission a
+JOIN Method_of_admission m ON m.Method_of_admission_code = a.Method_of_admission_code
+JOIN Diagnosis d ON d.Admission_ID = a.AdmissionID
+JOIN Patient p ON p.PatientID = a.Patient_ID
+WHERE Discharge_Date BETWEEN '2015-04-01' AND '2016-03-31'
+  AND m.Method_of_admission_type = 'Emergency'
+  AND p.Postcode = '8064 akinfenwa ibadan'
+GROUP BY d.Diagnosis_code, d.Diagnosis_Description;
 
--- 4️⃣ GP performance by number of admissions handled
-SELECT g.GP_Name, s.SpecialtyName, COUNT(a.AdmissionID) AS AdmissionsHandled
-FROM GP g
-JOIN Admission a ON g.GP_ID = a.GP_ID
-JOIN Specialty s ON g.SpecialtyID = s.SpecialtyID
-GROUP BY g.GP_Name, s.SpecialtyName
-ORDER BY AdmissionsHandled DESC;
+-- 6. Primary diagnosis with longest avg. length of stay (≥100 episodes)
+SELECT TOP 1 d.Diagnosis_code, d.Diagnosis_Description,
+       AVG(DATEDIFF(DAY, a.Admission_Date, a.Discharge_Date)) AS AvgLengthOfStay
+FROM Admission a
+JOIN Diagnosis d ON d.Admission_ID = a.AdmissionID
+JOIN Method_of_admission m ON m.Method_of_admission_code = a.Method_of_admission_code
+WHERE Discharge_Date BETWEEN '2015-04-01' AND '2016-03-31'
+  AND m.Method_of_admission_type IN ('Emergency', 'Elective')
+GROUP BY d.Diagnosis_code, d.Diagnosis_Description
+HAVING COUNT(*) >= 100
+ORDER BY AvgLengthOfStay DESC;
 
--- 5️⃣ Ward utilization report
-SELECT w.WardName, w.Capacity, COUNT(a.AdmissionID) AS CurrentOccupancy,
-       ROUND(COUNT(a.AdmissionID)/w.Capacity * 100, 1) AS OccupancyRate
-FROM Ward w
-LEFT JOIN Admission a ON w.WardID = a.WardID
-GROUP BY w.WardName, w.Capacity;
+-- 7. GP Practice with largest number of admissions (GP Referral, FY 2015/16)
+SELECT TOP 1 g.Practice_name, COUNT(DISTINCT a.AdmissionID) AS TotalAdmission
+FROM Admission a
+JOIN GPPractice g ON g.GPPractice_code = a.GPPractice_code
+JOIN Method_of_admission m ON m.Method_of_admission_code = a.Method_of_admission_code
+WHERE Admission_Date BETWEEN '2015-04-01' AND '2016-03-31'
+  AND m.Method_of_admission_type = 'GP Referral'
+GROUP BY g.Practice_name
+ORDER BY TotalAdmission DESC;
 
+-- 8. Admission within 7 days of discharge (Elective → Emergency)
+SELECT a1.Patient_ID,
+       a1.AdmissionID AS FirstADMID,
+       a1.Discharge_Date AS FirstDiscDate,
+       ma1.Method_of_admission_type AS FirstMethodType,
+       a1.SpecialtyCode AS FirstSpecialty,
+       a2.AdmissionID AS SecondADMID,
+       a2.Admission_Date AS SecondAdmDate,
+       ma2.Method_of_admission_type AS SecondMethodType,
+       a2.SpecialtyCode AS SecondSpecialty,
+       DATEDIFF(DAY, a1.Discharge_Date, a2.Admission_Date) AS Days_Between_Episode
+FROM Admission a1
+JOIN Admission a2 ON a1.Patient_ID = a2.Patient_ID
+  AND a1.AdmissionID <> a2.AdmissionID
+JOIN Method_of_admission ma1 ON ma1.Method_of_admission_code = a1.Method_of_admission_code
+JOIN Method_of_admission ma2 ON ma2.Method_of_admission_code = a2.Method_of_admission_code
+JOIN Specialty s1 ON s1.SpecialtyCode = a1.SpecialtyCode
+JOIN Specialty s2 ON s2.SpecialtyCode = a2.SpecialtyCode
+WHERE a2.Admission_Date > a1.Discharge_Date
+  AND DATEDIFF(DAY, a1.Discharge_Date, a2.Admission_Date) <= 7
+  AND ma1.Method_of_admission_type = 'Elective'
+  AND ma2.Method_of_admission_type = 'Emergency';
+
+-- 9. Patients with more than one admission in FY 2015/16
+SELECT CONCAT(p.Firstname, ' ', p.Surname) AS FullName, COUNT(*) AS TotalAdmission
+FROM Admission a
+JOIN Patient p ON p.PatientID = a.Patient_ID
+WHERE Admission_Date BETWEEN '2015-04-01' AND '2016-03-31'
+GROUP BY p.Firstname, p.Surname
+HAVING COUNT(*) > 1
+ORDER BY TotalAdmission DESC;
+
+-- 10. Average length of stay by ward in FY 2015/16
+SELECT w.Ward_Name, AVG(DATEDIFF(DAY, a.Admission_Date, a.Discharge_Date)) AS AvgLengthOfStay
+FROM Admission a
+JOIN Ward w ON w.Ward_Code = a.WardCode
+WHERE Admission_Date BETWEEN '2015-04-01' AND '2016-03-31'
+GROUP BY w.Ward_Name
+ORDER BY AvgLengthOfStay DESC;
+
+-- 11. Top 5 specialties with highest number of admissions (FY 2015/16)
+SELECT TOP 5 s.SpecialtyName, COUNT(*) AS HighestAdmission
+FROM Admission a
+JOIN Specialty s ON s.SpecialtyCode = a.SpecialtyCode
+WHERE Admission_Date BETWEEN '2015-04-01' AND '2016-03-31'
+GROUP BY s.SpecialtyName
+ORDER BY HighestAdmission DESC;
+
+-- 12. GP with most patients admitted (FY 2015/16)
+SELECT TOP 1 g.GP_Name, COUNT(DISTINCT a.Patient_ID) AS MostAdmittedPatient
+FROM Admission a
+JOIN GP g ON g.GP_code = a.GP_code
+JOIN Patient p ON p.PatientID = a.Patient_ID
+WHERE Admission_Date BETWEEN '2015-04-01' AND '2016-03-31'
+GROUP BY g.GP_Name
+ORDER BY MostAdmittedPatient DESC;
+
+-- 13. List all patients admitted to ICU and their diagnoses
+SELECT CONCAT(p.Firstname, ' ', p.Surname) AS FullName, d.Diagnosis_Description
+FROM Admission a
+JOIN Patient p ON p.PatientID = a.Patient_ID
+JOIN Diagnosis d ON d.Admission_ID = a.AdmissionID
+JOIN Ward w ON w.Ward_Code = a.WardCode
+WHERE w.Ward_Name = 'ICU'
+GROUP BY p.Firstname, p.Surname, d.Diagnosis_Description;
