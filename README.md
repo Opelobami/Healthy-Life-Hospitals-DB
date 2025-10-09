@@ -148,6 +148,58 @@ The schema enforces **referential integrity** through foreign keys, connecting t
 ## 🧩 Sample SQL Queries
 
 ```sql
+--Database implementation project for HealthyLife Hospitals to manage patient admissions, diagnoses, wards, and related information.
+--Also analyze patient admissions, understand common diagnoses, and optimize hospital operations.
+
+CREATE DATABASE HealthyLifeHospitals;
+
+USE HealthyLifeHospitals;
+
+
+--Setting Standard SQL Practices in place.
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Now, lets create our first table [Patient]
+
+CREATE TABLE [dbo].[Patient](
+	[PatientID] [INT] IDENTITY(1,1) NOT NULL,
+	[Firstname] [NVARCHAR](20) NOT NULL,
+	[Surname] [NVARCHAR](20) NOT NULL,
+	[DateofBirth] [DATETIME] NOT NULL,
+	[Gender] [NVARCHAR](10) NOT NULL,
+	[Postcode] [NVARCHAR](50) NOT NULL,
+
+--Add primary key constraint to patientID identifying it as clustered primary key.
+
+CONSTRAINT [PK_Patient_PatientID] PRIMARY KEY CLUSTERED ([PatientID] ASC)
+	WITH (PAD_INDEX = OFF,
+		STATISTICS_NORECOMPUTE = OFF,
+		IGNORE_DUP_KEY = OFF,
+		ALLOW_ROW_LOCKS = ON,
+		ALLOW_PAGE_LOCKS = ON,
+		OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF
+		)ON [PRIMARY]
+		) ON [PRIMARY]
+		GO
+
+--Add constraint to firstname, surname, gender, postcode and DOB ensuring that they do not come up empty or filled with white spaces or in the future.
+ALTER TABLE [dbo].[Patient] ADD CONSTRAINT [CK_Patient_FirstName]
+CHECK(LEN(LTRIM(RTRIM(Firstname))) > 0)
+GO
+
+ALTER TABLE [dbo].[Patient] ADD CONSTRAINT [CK_Patient_Surname]
+CHECK(LEN(LTRIM(RTRIM(Surname))) >0)
+GO
+
+ALTER TABLE [dbo].[Patient] ADD CONSTRAINT [CK_Patient_Postcode]
+CHECK(LEN(LTRIM(RTRIM(Postcode))) >0)
+GO
+
 -- 1️. List all patients with their details (ID, Name, Gender, Date of Birth, Postcode)
 SELECT *
 FROM Patient;
