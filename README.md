@@ -1,12 +1,12 @@
-# 🏥 Healthy Life Hospitals Database  
+# 🏥 Healthy Life Hospital Database  
 
-A robust **SQL-based relational database** designed to model and manage hospital operations from **patient admissions** to **diagnosis tracking**, **GP management**, and **ward allocation**. This project showcases strong skills in **data modeling**, **relational integrity**, and **SQL querying**, demonstrating how well-structured databases can enhance hospital administration, improve efficiency, and support data-driven healthcare delivery.  
+A robust **SQL-based relational database** designed to model and manage hospital operations from **patient admissions** to **diagnosis tracking**, **GP management**, and **ward allocation**. This project showcases strong skills in **data modeling**, **relational integrity**, and **SQL querying**, demonstrating how well structured databases can enhance hospital administration, improve efficiency, and support data-driven healthcare delivery.  
 
 ---
 
 ## 📘 Overview  
 
-The **Healthy Life Hospitals Database** simulates a modern hospital information system that captures essential data about **patients**, **medical staff**, **diagnoses**, and **hospital units**.  
+The **Healthy Life Hospital Database** simulates a modern hospital information system that captures essential data about **patients**, **medical staff**, **diagnoses**, and **hospital units**.  
 
 It is designed to:  
 - Ensure **data accuracy, consistency, and integrity** across all hospital entities.  
@@ -18,7 +18,7 @@ It is designed to:
 ## 🎯 Project Objectives  
 
 - Build a **normalized relational database** for hospital management.  
-- Establish **entity relationships** between patients, GPs, diagnoses, and wards.  
+- Establish **entity relationships** between patients, admissions, methods of admission, GPs, diagnoses, and wards.  
 - Provide **SQL-based insights** into patient care, GP performance, and diagnosis trends.  
 - Support analytical reporting through **joins, aggregations, and subqueries**.  
 
@@ -121,20 +121,19 @@ The schema enforces **referential integrity** through foreign keys, connecting t
 ## 🧰 Tools & Technologies  
 
 - **SQL Server** – Database design, creation, querying, and ERD Diagram 
-- **Power BI (Optional)** – Dashboard reporting and KPI visualization  
-- **Excel / CSV** – Data entry, cleaning, and validation  
+- **Power BI** – Dashboard reporting and KPI visualization  
 
 ---
 
-## ⚙️ Project Workflow  
+## ⚙️ Project Workflow
 
-1. **Database Design**  
+1. **Database Creation & Population**  
+   - Implemented `CREATE DATABASE`, `CREATE TABLE` scripts with **primary** and **foreign keys**.  
+   - Loaded and validated sample datasets using `INSERT INTO` commands. 
+
+2. **Database Design**  
    - Developed an ERD to visualize entity relationships.  
-   - Normalized all tables up to **Third Normal Form (3NF)** to eliminate redundancy and ensure efficiency.  
-
-2. **Database Creation & Population**  
-   - Implemented `CREATE TABLE` scripts with **primary** and **foreign keys**.  
-   - Loaded and validated sample datasets using `INSERT INTO` commands.  
+   - Normalized all tables up to **Third Normal Form (3NF)** to eliminate redundancy and ensure efficiency. 
 
 3. **Data Querying & Analysis**  
    - Performed **joins, subqueries, and aggregations** for relational insights.  
@@ -148,8 +147,7 @@ The schema enforces **referential integrity** through foreign keys, connecting t
 ## 🧩 Sample SQL Queries
 
 ```sql
---Database implementation project for HealthyLife Hospitals to manage patient admissions, diagnoses, wards, and related information.
---Also analyze patient admissions, understand common diagnoses, and optimize hospital operations.
+--Database implementation project for HealthyLife Hospitals to manage patient admissions, diagnoses, wards, and related information. Also analyze patient admissions, understand common diagnoses, and optimize hospital operations.
 
 CREATE DATABASE HealthyLifeHospitals;
 
@@ -339,7 +337,7 @@ GROUP BY p.Firstname, p.Surname, d.Diagnosis_Description;
 | **Total Admissions** | 100 |
 | **Average Length of Stay** | 14 days |
 | **Most Active GP** | Dr. Aisha *(37 patient admissions)* |
-| **Top GP Practice** | Ibadan Central Clinic *(13 admissions)* |
+| **Top GP Practice** | Ibadan Central Hospital *(13 admissions)* |
 | **Leading Specialty (2015/16)** | Oncology *(15 admissions)* |
 | **Most Occupied Ward** | General Medicine *(14 admissions)* |
 | **Dominant Admission Method** | GP Referral *(29 cases)* |
@@ -367,7 +365,7 @@ GROUP BY p.Firstname, p.Surname, d.Diagnosis_Description;
 
 ## 🧠 Conclusion  
 
-The **Healthy Life Hospitals Database** demonstrates how structured data management can **transform hospital operations** through reliable, consistent, and integrated information systems.  
+The **Healthy Life Hospital Database** demonstrates how structured data management can **transform hospital operations** through reliable, consistent, and integrated information systems.  
 
 By employing **SQL relational principles** and **data normalization standards**, the database ensures:
 - Seamless **patient tracking**
