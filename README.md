@@ -330,6 +330,8 @@ GROUP BY p.Firstname, p.Surname, d.Diagnosis_Description;
 
 ---
 
+👉 **[View Interactive Power BI Dashboard →]** (https://app.powerbi.com/view?r=eyJrIjoiN2I5MDhhM2QtYjY0Ny00NWMwLWJlNzUtYzM5YzlkNGUxNTllIiwidCI6ImRkYjk1YzMwLWU3OWUtNDdiNy05YTVmLWE0MmNkZDljOTk5ZCJ9)  
+
 ## 📊 Key Insights  
 
 | **Metric** | **Insight** |
@@ -394,6 +396,14 @@ This project mirrors the data architecture of modern **Hospital Information Syst
    → Use **machine learning models** to forecast admission trends, diagnosis frequencies, and staff workload — enabling proactive hospital management.  
 
 ---
+
+## 📬 Contact  
+
+If you’re looking for a data-driven problem solver who can turn complex datasets into actionable stories, let’s connect:  
+
+- **Name:** Opeyemi Ayodeji  
+- **LinkedIn:** (https://www.linkedin.com/in/opeyemi-ayodeji-86a696b0/)  
+- **Email:** sopeyemi65@gmail.com  
 
 ✨ *A data-driven healthcare system begins with clean, connected, and well-modeled databases.*  
 **Healthy Life Hospitals Database** proves the power of SQL in delivering actionable healthcare insights.
