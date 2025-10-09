@@ -330,4 +330,70 @@ GROUP BY p.Firstname, p.Surname, d.Diagnosis_Description;
 
 ---
 
-### 📊 Key Insights
+## 📊 Key Insights  
+
+| **Metric** | **Insight** |
+|-------------|-------------|
+| **Total Admissions** | 100 |
+| **Average Length of Stay** | 14 days |
+| **Most Active GP** | Dr. Aisha *(37 patient admissions)* |
+| **Top GP Practice** | Ibadan Central Clinic *(13 admissions)* |
+| **Leading Specialty (2015/16)** | Oncology *(15 admissions)* |
+| **Most Occupied Ward** | General Medicine *(14 admissions)* |
+| **Dominant Admission Method** | GP Referral *(29 cases)* |
+| **Gender Distribution** | 53% Male · 47% Female |
+
+---
+
+## 📅 Yearly Diagnosis Summary  
+
+| **Year** | **Top Diagnosis** | **Frequency** | **Lowest Diagnosis** | **Frequency** |
+|-----------|------------------|----------------|----------------------|----------------|
+| 2014/15 | Asthma | 6 | Typhoid | 2 |
+| 2015/16 | Hypertension | 7 | Asthma | 3 |
+| 2016 | Hepatitis | 3 | Ulcer | 1 |
+
+---
+
+## 🏥 Admission Method Breakdown  
+
+- **Emergency Admissions:** 20 → *Top Diagnosis: Hypertension*  
+- **Transfers:** 23 → *Top Diagnosis: Diabetes*  
+- **Referrals:** 29 → *Top Diagnosis: COVID-19*
+
+---
+
+## 🧠 Conclusion  
+
+The **Healthy Life Hospitals Database** demonstrates how structured data management can **transform hospital operations** through reliable, consistent, and integrated information systems.  
+
+By employing **SQL relational principles** and **data normalization standards**, the database ensures:
+- Seamless **patient tracking**
+- Improved **clinical oversight**
+- Enhanced **analytical reporting**
+
+This project mirrors the data architecture of modern **Hospital Information Systems (HIS)** and **Electronic Health Records (EHR)**, aligning with **global healthcare data standards** and showcasing data-driven excellence in hospital analytics.  
+
+---
+
+## 💡 Recommendations  
+
+1. **Integration with BI Tools**  
+   → Extend the database into **Power BI** or **Tableau** for real-time monitoring of KPIs such as bed occupancy, readmission rates, and length of stay.  
+
+2. **Automation & Alerts**  
+   → Implement **SQL triggers** or scheduled stored procedures to track delayed discharges or identify critical readmissions.  
+
+3. **Scalability & Interoperability**  
+   → Integrate **ICD-10** diagnosis codes and ensure **HL7/FHIR** compliance to connect with other hospital systems.  
+
+4. **Security & Access Control**  
+   → Introduce **role-based access permissions** and encryption for data confidentiality in compliance with **HIPAA** or **GDPR** standards.  
+
+5. **Predictive Analytics**  
+   → Use **machine learning models** to forecast admission trends, diagnosis frequencies, and staff workload — enabling proactive hospital management.  
+
+---
+
+✨ *A data-driven healthcare system begins with clean, connected, and well-modeled databases.*  
+**Healthy Life Hospitals Database** proves the power of SQL in delivering actionable healthcare insights.
