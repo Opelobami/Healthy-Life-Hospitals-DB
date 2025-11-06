@@ -1,351 +1,100 @@
-# 🏥 Healthy Life Hospital Database  
+# Healthy Life Hospital Database  
 
-A robust **SQL-based relational database** designed to model and manage hospital operations from **patient admissions** to **diagnosis tracking**, **GP management**, and **ward allocation**. This project showcases strong skills in **data modeling**, **relational integrity**, and **SQL querying**, demonstrating how well structured databases can enhance hospital administration, improve efficiency, and support data-driven healthcare delivery.  
+A **SQL-based relational database** designed to model and manage hospital operations from **patient admissions** and **diagnosis tracking** to **GP performance** and **ward allocation**.  
 
----
-
-## 📘 Overview  
-
-The **Healthy Life Hospital Database** simulates a modern hospital information system that captures essential data about **patients**, **medical staff**, **diagnoses**, and **hospital units**.  
-
-It is designed to:  
-- Ensure **data accuracy, consistency, and integrity** across all hospital entities.  
-- Facilitate **efficient patient tracking** from admission to discharge.  
-- Enable **data-driven reporting** on hospital operations and clinical performance.  
+This project demonstrates strong capabilities in **data modeling**, **database normalization**, and **SQL querying**, revealing how structured databases can enhance hospital efficiency, clinical decision-making, and data-driven healthcare delivery.  
 
 ---
 
-## 🎯 Project Objectives  
+## Overview  
 
-- Build a **normalized relational database** for hospital management.  
-- Establish **entity relationships** between patients, admissions, methods of admission, GPs, diagnoses, and wards.  
-- Provide **SQL-based insights** into patient care, GP performance, and diagnosis trends.  
-- Support analytical reporting through **joins, aggregations, and subqueries**.  
+The **Healthy Life Hospital Database** is a data management solution simulating a modern hospital information system. It provides an integrated view of how patients, doctors, diagnoses, and wards interact enabling seamless **tracking, analysis, and reporting** across hospital functions.  
 
----
-
-## 🧱 Database Schema Overview  
-
-The database consists of **seven interrelated tables**, ensuring comprehensive coverage of hospital workflows.  
-
-### 🏨 `Admission`  
-Captures details of each patient’s admission into the hospital.  
-**Key Fields:**  
-- AdmissionID *(Primary Key)*  
-- PatientID *(Foreign Key referencing Patient)*  
-- WardCode *(Foreign Key referencing Ward)*  
-- SpecialtyCode *(Foreign Key referencing Specialty)*  
-- Method-of-admission-code *(Foreign Key referencing MethodOfAdmission)*  
-- AdmissionDate  
-- DischargeDate  
+Through this project, I designed a **normalized relational database** that ensures data **accuracy**, **consistency**, and **integrity** allowing hospital management to make evidence-based decisions and optimize resources.
 
 ---
 
-### ⚕️ `Diagnosis`  
-Records medical diagnoses linked to patient admissions.  
-**Key Fields:**  
-- DiagnosisCode *(Primary Key)*  
-- AdmissionID *(Foreign Key referencing Admission)*  
-- Diagnosis-Description *(Description of the patient's diagnosis)* 
+## Project Objectives  
+
+- Design and implement a **relational database** for hospital management.  
+- Establish **entity relationships** between patients, admissions, diagnoses, and GPs.  
+- Enable **insightful SQL-based queries** to monitor hospital activities.  
+- Support **analytical reporting** for operational and clinical performance.  
 
 ---
 
-### 👨‍⚕️ `GP` (General Practitioner)  
-Contains information about medical practitioners providing patient care.  
-**Key Fields:**  
-- GPCode *(Primary Key)*  
-- GPName *(General Practitioner's name)*
-- GP-Practice-Code *(Foreign key referencing GP Practice)* 
+## Why This Project Matters  
 
----
+In healthcare, every decision counts. Hospitals generate massive data daily yet much of it remains underutilized due to poor structuring or lack of integration.  
 
-### 🏥 `GP Practice`  
-Represents the medical facilities or clinics that employ or manage GPs.  
-**Key Fields:**  
-- PracticeCode *(Primary Key)*  
-- PracticeName *(Name of the medical facility)*
-- Practice-Post-Code *(GP-Practice address)* 
-
----
-
-### 🚪 `Method of Admission`  
-Defines the mode or method through which a patient was admitted.  
-**Key Fields:**  
-- Method-of-admission-code *(Primary Key)*  
-- Method-of-admission-type *(e.g., Emergency, Referral, Direct, Elective)*  
-
----
-
-### 🧍 `Patient`  
-Holds demographic and identification details of each patient.  
-**Key Fields:**  
-- PatientID *(Primary Key)*  
-- FirstName
-- Surname  
-- DateOfBirth  
-- Gender  
-- Post-Code
-
----
-
-### 🩺 `Specialty`  
-Specifies the area of medical expertise for GPs or hospital departments.  
-**Key Fields:**  
-- SpecialtyCode *(Primary Key)*  
-- SpecialtyName *(e.g., Pediatrics, Cardiology, Orthopedics)*  
-
----
-
-### 🛏️ `Ward`  
-Represents hospital wards where patients are admitted.  
-**Key Fields:**  
-- WardCode *(Primary Key)*  
-- WardName  
-- WardType 
-
----
-
-## 🧩 Entity Relationships  
-
-The schema enforces **referential integrity** through foreign keys, connecting the entities as follows:  
-
-- Each **Patient** can have multiple **Admissions**.  
-- Each **Admission** is linked to a **Ward**, **Specialty**, and **Method of Admission**.  
-- Each **GP** belongs to a **GP Practice**.  
-- Each **Admission** can have multiple **Diagnoses**.  
- 
-[ERD Preview] (https://drive.google.com/file/d/1zE87fWG0Xk6OdTz2y1oD4Bd-UF9bUyLI/view?usp=sharing)
+The **Healthy Life Hospital Database** addresses this gap by creating a **single source of truth** for hospital operations. With this system, stakeholders can:  
+- Understand patient flow and admission patterns.  
+- Identify overworked wards and optimize capacity.  
+- Monitor GP workload and performance.  
+- Track the most frequent diagnoses and resource demands.  
 
 ---
 
 ## 🧰 Tools & Technologies  
 
-- **SQL Server** – Database design, creation, querying, and ERD Diagram 
-- **Power BI** – Dashboard reporting and KPI visualization  
+| **Tool / Technology** | **Purpose** |
+|------------------------|-------------|
+| SQL Server | Database creation, relational modeling, querying |
+| Power BI | Visualization and reporting |
+| ERD (Entity Relationship Diagram) | Schema design and normalization verification |
+
+**Database Design:**  
+- 7 interrelated tables (Patient, GP, Ward, Admission, Diagnosis, Specialty, Method of Admission)  
+- Fully normalized up to **3NF** for optimal performance and minimal redundancy  
 
 ---
 
-## ⚙️ Project Workflow
+## Methodology  
 
-1. **Database Creation & Population**  
-   - Implemented `CREATE DATABASE`, `CREATE TABLE` scripts with **primary** and **foreign keys**.  
-   - Loaded and validated sample datasets using `INSERT INTO` commands. 
+1. **Database Creation & Structuring**  
+   - Designed schema ensuring **referential integrity** with primary and foreign keys.  
+   - Applied constraints to enforce valid and consistent data entry.  
 
-2. **Database Design**  
-   - Developed an ERD to visualize entity relationships.  
-   - Normalized all tables up to **Third Normal Form (3NF)** to eliminate redundancy and ensure efficiency. 
+2. **Data Population & Cleaning**  
+   - Inserted mock datasets to replicate real hospital operations.  
+   - Validated relationships through joins and foreign key constraints.  
 
-3. **Data Querying & Analysis**  
-   - Performed **joins, subqueries, and aggregations** for relational insights.  
-   - Generated analytical reports on patient admissions, diagnosis frequency, and ward occupancy.  
+3. **SQL Query Analysis**  
+   - Wrote analytical queries for insights on admissions, diagnoses, and GP performance.  
+   - Conducted temporal analysis (2014–2016) to reveal admission trends.  
 
-4. **Insights & Visualization**  
-   - Integrated results with **Power BI** to visualize key healthcare metrics like admission trends and GP workload.  
-
----
-
-## 🧩 Sample SQL Queries
-
-```sql
---Database implementation project for HealthyLife Hospitals to manage patient admissions, diagnoses, wards, and related information. Also analyze patient admissions, understand common diagnoses, and optimize hospital operations.
-
-CREATE DATABASE HealthyLifeHospitals;
-
-USE HealthyLifeHospitals;
-
-
---Setting Standard SQL Practices in place.
-
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
--- Now, lets create our first table [Patient]
-
-CREATE TABLE [dbo].[Patient](
-	[PatientID] [INT] IDENTITY(1,1) NOT NULL,
-	[Firstname] [NVARCHAR](20) NOT NULL,
-	[Surname] [NVARCHAR](20) NOT NULL,
-	[DateofBirth] [DATETIME] NOT NULL,
-	[Gender] [NVARCHAR](10) NOT NULL,
-	[Postcode] [NVARCHAR](50) NOT NULL,
-
---Add primary key constraint to patientID identifying it as clustered primary key.
-
-CONSTRAINT [PK_Patient_PatientID] PRIMARY KEY CLUSTERED ([PatientID] ASC)
-	WITH (PAD_INDEX = OFF,
-		STATISTICS_NORECOMPUTE = OFF,
-		IGNORE_DUP_KEY = OFF,
-		ALLOW_ROW_LOCKS = ON,
-		ALLOW_PAGE_LOCKS = ON,
-		OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF
-		)ON [PRIMARY]
-		) ON [PRIMARY]
-		GO
-
---Add constraint to firstname, surname, gender, postcode and DOB ensuring that they do not come up empty or filled with white spaces or in the future.
-ALTER TABLE [dbo].[Patient] ADD CONSTRAINT [CK_Patient_FirstName]
-CHECK(LEN(LTRIM(RTRIM(Firstname))) > 0)
-GO
-
-ALTER TABLE [dbo].[Patient] ADD CONSTRAINT [CK_Patient_Surname]
-CHECK(LEN(LTRIM(RTRIM(Surname))) >0)
-GO
-
-ALTER TABLE [dbo].[Patient] ADD CONSTRAINT [CK_Patient_Postcode]
-CHECK(LEN(LTRIM(RTRIM(Postcode))) >0)
-GO
-
--- 1️. List all patients with their details (ID, Name, Gender, Date of Birth, Postcode)
-SELECT *
-FROM Patient;
-
--- 2. Retrieve the total number of admissions per patient
-SELECT CONCAT(p.Firstname, ' ', p.Surname) AS FullName, COUNT(*) AS TotalAdmission
-FROM Patient p
-JOIN Admission a ON p.PatientID = a.Patient_ID
-GROUP BY p.Firstname, p.Surname
-ORDER BY TotalAdmission DESC;
-
--- 3. Find the maximum length of stay in FY 2014/15 for Endoscopy Suite (Elective)
-SELECT MAX(DATEDIFF(DAY, Admission_Date, Discharge_Date)) AS MaxLengthOfStay
-FROM Admission a
-JOIN Ward w ON w.Ward_Code = a.WardCode
-JOIN Method_of_admission m ON m.Method_of_admission_code = a.Method_of_admission_code
-WHERE Discharge_Date BETWEEN '2014-04-01' AND '2015-03-31'
-  AND w.Ward_Name = 'Endoscopy Suite'
-  AND m.Method_of_admission_type = 'Elective';
-
--- 4. Total number of admissions per ward in FY 2015/16
-SELECT w.Ward_Name, COUNT(*) AS TotalAdmission
-FROM Admission a
-JOIN Ward w ON a.WardCode = w.Ward_Code
-WHERE Admission_Date BETWEEN '2015-04-01' AND '2016-03-31'
-GROUP BY w.Ward_Name
-ORDER BY TotalAdmission DESC;
-
--- 5. Most common primary diagnosis (Emergency, SK2 area, FY 2015/16)
-SELECT TOP 1 d.Diagnosis_code, d.Diagnosis_Description
-FROM Admission a
-JOIN Method_of_admission m ON m.Method_of_admission_code = a.Method_of_admission_code
-JOIN Diagnosis d ON d.Admission_ID = a.AdmissionID
-JOIN Patient p ON p.PatientID = a.Patient_ID
-WHERE Discharge_Date BETWEEN '2015-04-01' AND '2016-03-31'
-  AND m.Method_of_admission_type = 'Emergency'
-  AND p.Postcode = '8064 akinfenwa ibadan'
-GROUP BY d.Diagnosis_code, d.Diagnosis_Description;
-
--- 6. Primary diagnosis with longest avg. length of stay (≥100 episodes)
-SELECT TOP 1 d.Diagnosis_code, d.Diagnosis_Description,
-       AVG(DATEDIFF(DAY, a.Admission_Date, a.Discharge_Date)) AS AvgLengthOfStay
-FROM Admission a
-JOIN Diagnosis d ON d.Admission_ID = a.AdmissionID
-JOIN Method_of_admission m ON m.Method_of_admission_code = a.Method_of_admission_code
-WHERE Discharge_Date BETWEEN '2015-04-01' AND '2016-03-31'
-  AND m.Method_of_admission_type IN ('Emergency', 'Elective')
-GROUP BY d.Diagnosis_code, d.Diagnosis_Description
-HAVING COUNT(*) >= 100
-ORDER BY AvgLengthOfStay DESC;
-
--- 7. GP Practice with largest number of admissions (GP Referral, FY 2015/16)
-SELECT TOP 1 g.Practice_name, COUNT(DISTINCT a.AdmissionID) AS TotalAdmission
-FROM Admission a
-JOIN GPPractice g ON g.GPPractice_code = a.GPPractice_code
-JOIN Method_of_admission m ON m.Method_of_admission_code = a.Method_of_admission_code
-WHERE Admission_Date BETWEEN '2015-04-01' AND '2016-03-31'
-  AND m.Method_of_admission_type = 'GP Referral'
-GROUP BY g.Practice_name
-ORDER BY TotalAdmission DESC;
-
--- 8. Admission within 7 days of discharge (Elective → Emergency)
-SELECT a1.Patient_ID,
-       a1.AdmissionID AS FirstADMID,
-       a1.Discharge_Date AS FirstDiscDate,
-       ma1.Method_of_admission_type AS FirstMethodType,
-       a1.SpecialtyCode AS FirstSpecialty,
-       a2.AdmissionID AS SecondADMID,
-       a2.Admission_Date AS SecondAdmDate,
-       ma2.Method_of_admission_type AS SecondMethodType,
-       a2.SpecialtyCode AS SecondSpecialty,
-       DATEDIFF(DAY, a1.Discharge_Date, a2.Admission_Date) AS Days_Between_Episode
-FROM Admission a1
-JOIN Admission a2 ON a1.Patient_ID = a2.Patient_ID
-  AND a1.AdmissionID <> a2.AdmissionID
-JOIN Method_of_admission ma1 ON ma1.Method_of_admission_code = a1.Method_of_admission_code
-JOIN Method_of_admission ma2 ON ma2.Method_of_admission_code = a2.Method_of_admission_code
-JOIN Specialty s1 ON s1.SpecialtyCode = a1.SpecialtyCode
-JOIN Specialty s2 ON s2.SpecialtyCode = a2.SpecialtyCode
-WHERE a2.Admission_Date > a1.Discharge_Date
-  AND DATEDIFF(DAY, a1.Discharge_Date, a2.Admission_Date) <= 7
-  AND ma1.Method_of_admission_type = 'Elective'
-  AND ma2.Method_of_admission_type = 'Emergency';
-
--- 9. Patients with more than one admission in FY 2015/16
-SELECT CONCAT(p.Firstname, ' ', p.Surname) AS FullName, COUNT(*) AS TotalAdmission
-FROM Admission a
-JOIN Patient p ON p.PatientID = a.Patient_ID
-WHERE Admission_Date BETWEEN '2015-04-01' AND '2016-03-31'
-GROUP BY p.Firstname, p.Surname
-HAVING COUNT(*) > 1
-ORDER BY TotalAdmission DESC;
-
--- 10. Average length of stay by ward in FY 2015/16
-SELECT w.Ward_Name, AVG(DATEDIFF(DAY, a.Admission_Date, a.Discharge_Date)) AS AvgLengthOfStay
-FROM Admission a
-JOIN Ward w ON w.Ward_Code = a.WardCode
-WHERE Admission_Date BETWEEN '2015-04-01' AND '2016-03-31'
-GROUP BY w.Ward_Name
-ORDER BY AvgLengthOfStay DESC;
-
--- 11. Top 5 specialties with highest number of admissions (FY 2015/16)
-SELECT TOP 5 s.SpecialtyName, COUNT(*) AS HighestAdmission
-FROM Admission a
-JOIN Specialty s ON s.SpecialtyCode = a.SpecialtyCode
-WHERE Admission_Date BETWEEN '2015-04-01' AND '2016-03-31'
-GROUP BY s.SpecialtyName
-ORDER BY HighestAdmission DESC;
-
--- 12. GP with most patients admitted (FY 2015/16)
-SELECT TOP 1 g.GP_Name, COUNT(DISTINCT a.Patient_ID) AS MostAdmittedPatient
-FROM Admission a
-JOIN GP g ON g.GP_code = a.GP_code
-JOIN Patient p ON p.PatientID = a.Patient_ID
-WHERE Admission_Date BETWEEN '2015-04-01' AND '2016-03-31'
-GROUP BY g.GP_Name
-ORDER BY MostAdmittedPatient DESC;
-
--- 13. List all patients admitted to ICU and their diagnoses
-SELECT CONCAT(p.Firstname, ' ', p.Surname) AS FullName, d.Diagnosis_Description
-FROM Admission a
-JOIN Patient p ON p.PatientID = a.Patient_ID
-JOIN Diagnosis d ON d.Admission_ID = a.AdmissionID
-JOIN Ward w ON w.Ward_Code = a.WardCode
-WHERE w.Ward_Name = 'ICU'
-GROUP BY p.Firstname, p.Surname, d.Diagnosis_Description;
-```
+4. **Data Visualization**  
+   - Integrated Power BI for interactive dashboards on admission rates, top diagnoses, and GP activity.  
 
 ---
 
-👉 **[View Interactive Power BI Dashboard →]** (https://app.powerbi.com/view?r=eyJrIjoiN2I5MDhhM2QtYjY0Ny00NWMwLWJlNzUtYzM5YzlkNGUxNTllIiwidCI6ImRkYjk1YzMwLWU3OWUtNDdiNy05YTVmLWE0MmNkZDljOTk5ZCJ9)  
+## 🗂️ Database Relationships  
 
-## 📊 Key Insights  
+- Each **Patient** can have multiple **Admissions**.  
+- Each **Admission** links to a **Ward**, **GP**, **Specialty**, and **Method of Admission**.  
+- Each **Admission** can have multiple **Diagnoses**.  
+- Each **GP** is assigned to one **GP Practice**.  
+
+🔗 [**View ERD Diagram**](https://drive.google.com/file/d/1zE87fWG0Xk6OdTz2y1oD4Bd-UF9bUyLI/view?usp=sharing)
+
+---
+
+## Key Insights  
 
 | **Metric** | **Insight** |
 |-------------|-------------|
 | **Total Admissions** | 100 |
 | **Average Length of Stay** | 14 days |
-| **Most Active GP** | Dr. Aisha *(37 patient admissions)* |
-| **Top GP Practice** | Ibadan Central Hospital *(13 admissions)* |
-| **Leading Specialty (2015/16)** | Oncology *(15 admissions)* |
-| **Most Occupied Ward** | General Medicine *(14 admissions)* |
-| **Dominant Admission Method** | GP Referral *(29 cases)* |
+| **Most Active GP** | Dr. Aisha - 37 patient admissions |
+| **Top GP Practice** | Ibadan Central Hospital - 13 admissions |
+| **Leading Specialty (2015/16)** | Oncology - 15 admissions |
+| **Most Occupied Ward** | General Medicine - 14 admissions |
+| **Dominant Admission Method** | GP Referral - 29 cases |
 | **Gender Distribution** | 53% Male · 47% Female |
 
 ---
 
-## 📅 Yearly Diagnosis Summary  
+## Yearly Diagnosis Summary  
 
 | **Year** | **Top Diagnosis** | **Frequency** | **Lowest Diagnosis** | **Frequency** |
 |-----------|------------------|----------------|----------------------|----------------|
@@ -355,53 +104,86 @@ GROUP BY p.Firstname, p.Surname, d.Diagnosis_Description;
 
 ---
 
-## 🏥 Admission Method Breakdown  
+## Admission Method Breakdown  
 
 - **Emergency Admissions:** 20 → *Top Diagnosis: Hypertension*  
 - **Transfers:** 23 → *Top Diagnosis: Diabetes*  
-- **Referrals:** 29 → *Top Diagnosis: COVID-19*
+- **Referrals:** 29 → *Top Diagnosis: COVID-19*  
 
 ---
 
-## 🧠 Conclusion  
+## Key Takeaways  
 
-The **Healthy Life Hospital Database** demonstrates how structured data management can **transform hospital operations** through reliable, consistent, and integrated information systems.  
-
-By employing **SQL relational principles** and **data normalization standards**, the database ensures:
-- Seamless **patient tracking**
-- Improved **clinical oversight**
-- Enhanced **analytical reporting**
-
-This project mirrors the data architecture of modern **Hospital Information Systems (HIS)** and **Electronic Health Records (EHR)**, aligning with **global healthcare data standards** and showcasing data-driven excellence in hospital analytics.  
+- **Admissions peaked through GP referrals**, indicating strong primary care reliance.  
+- **Oncology and General Medicine** are the busiest departments, signaling demand for specialized staff allocation.  
+- **Average stay duration of 14 days** suggests moderate bed turnover — an opportunity for efficiency improvement.  
+- **Hypertension and Diabetes** appear frequently, reinforcing the need for preventive care programs.  
 
 ---
 
-## 💡 Recommendations  
+## Conclusion  
 
-1. **Integration with BI Tools**  
-   → Extend the database into **Power BI** or **Tableau** for real-time monitoring of KPIs such as bed occupancy, readmission rates, and length of stay.  
+The **Healthy Life Hospital Database** proves that well-modeled data can revolutionize hospital management.  
 
-2. **Automation & Alerts**  
-   → Implement **SQL triggers** or scheduled stored procedures to track delayed discharges or identify critical readmissions.  
+By leveraging **SQL relational integrity** and **data normalization**, this system enables accurate tracking of patient admissions, diagnosis frequency, and staff performance.  
 
-3. **Scalability & Interoperability**  
-   → Integrate **ICD-10** diagnosis codes and ensure **HL7/FHIR** compliance to connect with other hospital systems.  
+Hospitals adopting similar frameworks can improve:  
+- **Operational efficiency**  
+- **Clinical decision-making**  
+- **Data-driven management strategies**  
 
-4. **Security & Access Control**  
-   → Introduce **role-based access permissions** and encryption for data confidentiality in compliance with **HIPAA** or **GDPR** standards.  
+---
 
-5. **Predictive Analytics**  
-   → Use **machine learning models** to forecast admission trends, diagnosis frequencies, and staff workload — enabling proactive hospital management.  
+## Recommendations  
+
+| **Action** | **Expected Impact** | **Implementation Approach** |
+|-------------|--------------------|-----------------------------|
+| Integrate BI Dashboards | Real-time visibility on admissions, occupancy, and diagnosis trends | Use Power BI / Tableau connected to SQL Server |
+| Automate Alerts | Reduce discharge delays and readmission risks | Schedule stored procedures or SQL triggers |
+| Predictive Analytics | Forecast patient inflow and high-risk diagnoses | Apply ML models to historical SQL data |
+| Strengthen Security | Ensure compliance with data privacy laws | Introduce role-based access and encryption |
+
+---
+
+## ⚠️ Risk of Inaction  
+
+If data-driven improvements are not implemented:  
+- **Admission bottlenecks** and **ward congestion** may increase.  
+- **Critical readmissions** may go unnoticed.  
+- **Decision-making** will remain reactive instead of proactive.  
+- **Regulatory non-compliance** could expose the hospital to data risks.  
+
+---
+
+## ✅ Benefits of Acting on Insights  
+
+By implementing the above recommendations, stakeholders can expect:  
+- Improved **bed utilization** and **operational efficiency**.  
+- Data-backed **policy and staffing decisions**.  
+- Enhanced **patient satisfaction** through faster turnaround.  
+- Compliance with **modern healthcare data standards**.  
+
+---
+
+## 📊 Visualization  
+
+[**Healthy Life Hospital**](https://app.powerbi.com/view?r=eyJrIjoiN2I5MDhhM2QtYjY0Ny00NWMwLWJlNzUtYzM5YzlkNGUxNTllIiwidCI6ImRkYjk1YzMwLWU3OWUtNDdiNy05YTVmLWE0MmNkZDljOTk5ZCJ9)
+
+The dashboard visualizes:  
+- Admission trends and ward occupancy rates  
+- GP workload and patient distribution  
+- Diagnosis frequency by year and department  
 
 ---
 
 ## 📬 Contact  
 
-If you’re looking for a data-driven problem solver who can turn complex datasets into actionable stories, let’s connect:  
+If you’re looking for a **data analyst passionate about healthcare intelligence**, let’s connect:  
 
-- **Name:** Opeyemi Ayodeji  
-- **LinkedIn:** (https://www.linkedin.com/in/opeyemi-ayodeji-86a696b0/)  
-- **Email:** sopeyemi65@gmail.com  
+- **👤 Name:** Opeyemi Ayodeji  
+- **🔗 LinkedIn:** [Opeyemi Ayodeji](https://www.linkedin.com/in/opeyemi-ayodeji-86a696b0/)  
+- **📧 Email:** sopeyemi65@gmail.com  
 
-✨ *A data-driven healthcare system begins with clean, connected, and well-modeled databases.*  
-**Healthy Life Hospitals Database** proves the power of SQL in delivering actionable healthcare insights.
+---
+
+> ✨ “Healthy decisions start with healthy data — the heartbeat of every efficient hospital.”  
