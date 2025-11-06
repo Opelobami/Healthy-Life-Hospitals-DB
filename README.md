@@ -35,7 +35,7 @@ The **Healthy Life Hospital Database** addresses this gap by creating a **single
 
 ---
 
-## 🧰 Tools & Technologies  
+## Tools & Technologies  
 
 | **Tool / Technology** | **Purpose** |
 |------------------------|-------------|
@@ -68,7 +68,7 @@ The **Healthy Life Hospital Database** addresses this gap by creating a **single
 
 ---
 
-## 🗂️ Database Relationships  
+## Database Relationships  
 
 - Each **Patient** can have multiple **Admissions**.  
 - Each **Admission** links to a **Ward**, **GP**, **Specialty**, and **Method of Admission**.  
@@ -145,7 +145,7 @@ Hospitals adopting similar frameworks can improve:
 
 ---
 
-## ⚠️ Risk of Inaction  
+## Risk of Inaction  
 
 If data-driven improvements are not implemented:  
 - **Admission bottlenecks** and **ward congestion** may increase.  
@@ -155,7 +155,7 @@ If data-driven improvements are not implemented:
 
 ---
 
-## ✅ Benefits of Acting on Insights  
+## Benefits of Acting on Insights  
 
 By implementing the above recommendations, stakeholders can expect:  
 - Improved **bed utilization** and **operational efficiency**.  
@@ -165,7 +165,7 @@ By implementing the above recommendations, stakeholders can expect:
 
 ---
 
-## 📊 Visualization  
+## Visualization  
 
 [**Healthy Life Hospital**](https://app.powerbi.com/view?r=eyJrIjoiN2I5MDhhM2QtYjY0Ny00NWMwLWJlNzUtYzM5YzlkNGUxNTllIiwidCI6ImRkYjk1YzMwLWU3OWUtNDdiNy05YTVmLWE0MmNkZDljOTk5ZCJ9)
 
@@ -176,7 +176,7 @@ The dashboard visualizes:
 
 ---
 
-## 📬 Contact  
+## Contact  
 
 If you’re looking for a **data analyst passionate about healthcare intelligence**, let’s connect:  
 
